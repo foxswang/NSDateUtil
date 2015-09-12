@@ -61,6 +61,14 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 + (NSDate *)dateByAddingSecond:(int)second toDate:(NSDate *)date;
 </code></pre>
 
+判断是今天，昨天，明天
+<pre><code>
+- (BOOL)isToday;
+- (BOOL)isYesterday;
+- (BOOL)isTomorrow;;
+</code></pre>
+
+
 对周的一些操作
 <pre><code>
 + (BOOL)dateIsSunday:(NSDate *)date;
