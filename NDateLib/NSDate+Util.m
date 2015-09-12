@@ -135,6 +135,23 @@ static NSDateFormatter *_displayFormatter = nil;
     return [weekdayComponents year];
 }
 
+#pragma mark - 常用功能
+- (BOOL)isToday
+{
+    NSInteger dayDistance = [NSDate distanceDay:self withDate:[NSDate date]];
+    return dayDistance == 0;
+}
+- (BOOL)isYesterday
+{
+    NSInteger dayDistance = [NSDate distanceDay:self withDate:[NSDate date]];
+    return dayDistance == -1;
+}
+- (BOOL)isTomorrow
+{
+    NSInteger dayDistance = [NSDate distanceDay:self withDate:[NSDate date]];
+    return dayDistance == 1;
+}
+
 #pragma mark - 星期判断
 + (BOOL)dateIsSunday:(NSDate *)date
 {

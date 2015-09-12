@@ -102,6 +102,14 @@
     _txtView.text = [NSString stringWithFormat:@"%@\n%@",_txtView.text,str];
     
     
+    NSDate *tomorrowDate  = [NSDate dateByAddingDay:1 toDate:[NSDate date]];
+    
+    NSDate *yestodayDate  = [NSDate dateByAddingDay:-1 toDate:[NSDate date]];
+    
+    
+    NSLog(@"是否是明天%@,%d",tomorrowDate,[tomorrowDate isTomorrow]);
+    NSLog(@"是否是昨天%@,%d",yestodayDate,[yestodayDate isYesterday]);
+    NSLog(@"是否是今天%@,%d",[NSDate date],[[NSDate date] isToday]);
     
     NSLog(@"------------ %ld",[[NSDate date] weekNumber]);
 }

@@ -50,6 +50,12 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 - (NSUInteger)month;
 - (NSUInteger)year;
 
+#pragma mark - 常用功能
+
+- (BOOL)isToday;
+- (BOOL)isYesterday;
+- (BOOL)isTomorrow;
+
 #pragma mark - 星期月
 + (BOOL)dateIsSunday:(NSDate *)date;
 + (BOOL)dateIsMonday:(NSDate *)date;
