@@ -1,8 +1,12 @@
 # NSDateUtil
 
-#### 史上最全面NSDate Utility 没有之一 
+#### 最全面NSDate Utility 没有之一 
 
 欢迎进群 486468672 一起探讨ios开发，共同学习技术，一起进步。
+
+这个帮助类参考 https://github.com/billymeltdown/nsdate-helper ，并针对中国的场景做了些优化
+
+欢迎star fork 提交新的需求
 
 <br >
 ##### 常用格式化字符串 满足80% 工作使用场景
