@@ -2,6 +2,7 @@
 史上最全面NSDate Utility之一
 
 ## 常用格式化字符串 满足80% 工作使用场景
+<pre><code>
 /*
 MMM d, yyyy h:mm a      9月 12, 2015 7:36 下午
 MMM d, yyyy             9月 12, 2015
@@ -14,7 +15,7 @@ yyyy-MM-dd              2015-09-12
 HH:mm:ss                19:36:24
 yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
  */
-
+</code></pre>
 ## 使用例子
 格式化字符串
 //yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
