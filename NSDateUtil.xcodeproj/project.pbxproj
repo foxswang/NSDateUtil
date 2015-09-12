@@ -14,7 +14,7 @@
 		989DD3D41BA42E36000ACD5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 989DD3D31BA42E36000ACD5C /* Images.xcassets */; };
 		989DD3D71BA42E36000ACD5C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989DD3D51BA42E36000ACD5C /* LaunchScreen.xib */; };
 		989DD3E31BA42E36000ACD5C /* NSDateUtilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 989DD3E21BA42E36000ACD5C /* NSDateUtilTests.m */; };
-		989DD3FD1BA49088000ACD5C /* NSDate+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 989DD3FC1BA49088000ACD5C /* NSDate+Util.m */; };
+		989DD4001BA49257000ACD5C /* NSDate+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 989DD3FF1BA49257000ACD5C /* NSDate+Util.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +41,8 @@
 		989DD3DC1BA42E36000ACD5C /* NSDateUtilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NSDateUtilTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		989DD3E11BA42E36000ACD5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		989DD3E21BA42E36000ACD5C /* NSDateUtilTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDateUtilTests.m; sourceTree = "<group>"; };
-		989DD3FB1BA49088000ACD5C /* NSDate+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Util.h"; path = "lib/NSDate+Util.h"; sourceTree = SOURCE_ROOT; };
-		989DD3FC1BA49088000ACD5C /* NSDate+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Util.m"; path = "lib/NSDate+Util.m"; sourceTree = SOURCE_ROOT; };
+		989DD3FE1BA49257000ACD5C /* NSDate+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Util.h"; path = "NDateLib/NSDate+Util.h"; sourceTree = SOURCE_ROOT; };
+		989DD3FF1BA49257000ACD5C /* NSDate+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Util.m"; path = "NDateLib/NSDate+Util.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +84,7 @@
 		989DD3C51BA42E36000ACD5C /* NSDateUtil */ = {
 			isa = PBXGroup;
 			children = (
-				989DD3EC1BA430EE000ACD5C /* lib */,
+				989DD3EC1BA430EE000ACD5C /* DateUtil */,
 				989DD3CA1BA42E36000ACD5C /* AppDelegate.h */,
 				989DD3CB1BA42E36000ACD5C /* AppDelegate.m */,
 				989DD3CD1BA42E36000ACD5C /* ViewController.h */,
@@ -123,12 +123,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		989DD3EC1BA430EE000ACD5C /* lib */ = {
+		989DD3EC1BA430EE000ACD5C /* DateUtil */ = {
 			isa = PBXGroup;
 			children = (
-				989DD3FB1BA49088000ACD5C /* NSDate+Util.h */,
-				989DD3FC1BA49088000ACD5C /* NSDate+Util.m */,
+				989DD3FE1BA49257000ACD5C /* NSDate+Util.h */,
+				989DD3FF1BA49257000ACD5C /* NSDate+Util.m */,
 			);
+			name = DateUtil;
 			path = lib;
 			sourceTree = "<group>";
 		};
@@ -232,7 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				989DD3FD1BA49088000ACD5C /* NSDate+Util.m in Sources */,
+				989DD4001BA49257000ACD5C /* NSDate+Util.m in Sources */,
 				989DD3CF1BA42E36000ACD5C /* ViewController.m in Sources */,
 				989DD3CC1BA42E36000ACD5C /* AppDelegate.m in Sources */,
 				989DD3C91BA42E36000ACD5C /* main.m in Sources */,
