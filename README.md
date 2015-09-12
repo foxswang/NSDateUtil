@@ -91,3 +91,5 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 //获取该日期所在的月的天数
 + (int)numOfDaysOnMonth:(NSDate *)date;
 </code></pre>
+
+## 更多功能，看代码
