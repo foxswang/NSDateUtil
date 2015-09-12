@@ -3,7 +3,6 @@
 #### 史上最全面NSDate Utility 没有之一
 <br >
 ##### 常用格式化字符串 满足80% 工作使用场景
-<br >
 <pre><code>
 /*
 MMM d, yyyy h:mm a      9月 12, 2015 7:36 下午
