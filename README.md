@@ -17,8 +17,10 @@ HH:mm:ss                19:36:24
 yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
  */
 </code></pre>
+
 ## 使用例子
-格式化字符串
+
+#####格式化字符串
 
 <pre><code>
 //yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
