@@ -35,7 +35,7 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 </code></pre>
 
 #####获取时间的详细信息
-<pre>code>
+<pre><code>
 /*
  获取时间的详细
  */
