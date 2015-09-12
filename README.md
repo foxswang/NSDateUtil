@@ -18,8 +18,11 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 </code></pre>
 ## 使用例子
 格式化字符串
+
+<pre><code>
 //yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
-<pre><code>[date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]  </code></pre>
+[date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"] 
+</code></pre>
 
 类似新浪微博的 ，刚刚，1分钟前 ，1小时前，1天前，显示
 //刚刚N分钟前，N小时前，昨天 HH:mm, YYYY-MM HH:mm
