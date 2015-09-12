@@ -25,9 +25,10 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 </code></pre>
 
 类似新浪微博的 ，刚刚，1分钟前 ，1小时前，1天前，显示
-//刚刚N分钟前，N小时前，昨天 HH:mm, YYYY-MM HH:mm
+
 <pre><code>
    [date stringWithHumanReadEasy]
+   //输出刚刚，N分钟前，N小时前，昨天 HH:mm, YYYY-MM HH:mm
 </code></pre>
 
 获取时间的详细信息
