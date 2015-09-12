@@ -18,16 +18,16 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 ## 使用例子
 格式化字符串
 //yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
-<code>[date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]  </code>
+<pre><code>[date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]  </code></pre>
 
 类似新浪微博的 ，刚刚，1分钟前 ，1小时前，1天前，显示
 //刚刚N分钟前，N小时前，昨天 HH:mm, YYYY-MM HH:mm
-<code>
+<pre><code>
    [date stringWithHumanReadEasy]
-</code>
+</code></pre>
 
 获取时间的详细信息
-<code>
+<pre>code>
 /*
  获取时间的详细
  */
@@ -39,10 +39,10 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 - (NSUInteger)weekNumber;
 - (NSUInteger)month;
 - (NSUInteger)year;
-</code>
+</code></pre>
 
 对日期的修改，获得新的时间
-<code>
+<pre><code>
 //对日期的修改
 //增加年
 + (NSDate *)dateByAddingYear:(int)year toDate:(NSDate *)date;
@@ -54,10 +54,10 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 + (NSDate *)dateByAddingHour:(int)hour toDate:(NSDate *)date;
 + (NSDate *)dateByAddingMinute:(int)minute toDate:(NSDate *)date;
 + (NSDate *)dateByAddingSecond:(int)second toDate:(NSDate *)date;
-</code>
+</code></pre>
 
 对周的一些操作
-<code>
+<pre><code>
 + (BOOL)dateIsSunday:(NSDate *)date;
 + (BOOL)dateIsMonday:(NSDate *)date;
 + (BOOL)dateIsTuesday:(NSDate *)date;
@@ -74,4 +74,4 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 - (NSDate *)endOfWeek;
 //获取该日期所在的月的天数
 + (int)numOfDaysOnMonth:(NSDate *)date;
-</code>
+</code></pre>
