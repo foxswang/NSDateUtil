@@ -99,4 +99,4 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 + (int)numOfDaysOnMonth:(NSDate *)date;
 </code></pre>
 
-## 更多功能，看代码
+## 更多功能,请看代码
