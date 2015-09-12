@@ -25,14 +25,14 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"] 
 </code></pre>
 
-类似新浪微博的 ，刚刚，1分钟前 ，1小时前，1天前，显示
+#####类似新浪微博的 ，刚刚，1分钟前 ，1小时前，1天前，显示
 
 <pre><code>
    [date stringWithHumanReadEasy]
    //输出刚刚，N分钟前，N小时前，昨天 HH:mm, YYYY-MM HH:mm
 </code></pre>
 
-获取时间的详细信息
+#####获取时间的详细信息
 <pre>code>
 /*
  获取时间的详细
@@ -47,7 +47,7 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 - (NSUInteger)year;
 </code></pre>
 
-对日期的修改，获得新的时间
+#####对日期的修改，获得新的时间
 <pre><code>
 //对日期的修改
 //增加年
@@ -62,7 +62,7 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 + (NSDate *)dateByAddingSecond:(int)second toDate:(NSDate *)date;
 </code></pre>
 
-判断是今天，昨天，明天
+#####判断是今天，昨天，明天
 <pre><code>
 - (BOOL)isToday;
 - (BOOL)isYesterday;
@@ -70,7 +70,7 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 </code></pre>
 
 
-对周的一些操作
+#####对周的一些操作
 <pre><code>
 + (BOOL)dateIsSunday:(NSDate *)date;
 + (BOOL)dateIsMonday:(NSDate *)date;
