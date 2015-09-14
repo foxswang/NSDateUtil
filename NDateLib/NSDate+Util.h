@@ -122,6 +122,8 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 + (NSString *)formatTimestampString;
 + (NSString *)formatDbString;
 
+#pragma mark - 微信日期显示格式
 
-
++ (NSString*)getWeChatFormatDateStringBySourceDate:(NSDate*)sourceDate;
+- (NSString*)getWeek:(int)weekIndex;
 @end
