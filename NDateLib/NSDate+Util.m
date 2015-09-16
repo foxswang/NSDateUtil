@@ -427,7 +427,7 @@ static NSDateFormatter *_displayFormatter = nil;
             text = NSLocalizedString(@"昨天", nil);
             break;
         default:
-            text = [NSString stringWithFormat:@"%ld天前", (NSInteger)daysAgo];
+            text = [NSString stringWithFormat:@"%ld天前", (long)daysAgo];
     }
     return text;
 }
@@ -444,9 +444,9 @@ static NSDateFormatter *_displayFormatter = nil;
     if (interval<1*60) {
         return @"刚刚";
     } else if (interval < 60*60){
-        return [NSString stringWithFormat:@"%ld分钟前",(NSInteger)(interval/60.0)];
+        return [NSString stringWithFormat:@"%ld分钟前",(long)(interval/60.0)];
     } else if (interval < 60*60*24 ){
-        return [NSString stringWithFormat:@"%ld小时前",(NSInteger)(interval/(60*60.0))];
+        return [NSString stringWithFormat:@"%ld小时前",(long)(interval/(60*60.0))];
     }
     
     if ([NSDate distanceDay:self withDate:[NSDate date]] == -1) {
@@ -507,7 +507,133 @@ static NSDateFormatter *_displayFormatter = nil;
 // preserving for compatibility
 + (NSString *)formatDbString
 {
+
 	return [NSDate formatTimestampString];
+}
+
++ (NSString *)getWeChatFormatDateStringBySourceDate:(NSDate *)sourceDate
+{
+
+    
+    NSString *ret = @"";
+    
+    if (!sourceDate) {
+        
+        return ret;
+    }
+    
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit |NSWeekdayCalendarUnit;
+    
+    NSDateComponents *sourceDateComponents = [cal components:unitFlags fromDate:sourceDate];
+    
+    int messageWeek = [sourceDateComponents weekday];
+    
+    
+    
+    NSDateComponents *nowDateComponents = [cal components:unitFlags fromDate:[NSDate date]];
+    
+    int nowWeek = [nowDateComponents weekday];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSTimeInterval second = [[NSDate date] timeIntervalSinceDate:sourceDate];
+    
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-86400];
+    
+    NSString * nowDayString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    NSString * sourceDateofDayString = [dateFormatter stringFromDate:sourceDate];
+    
+    NSString * yesterdayString = [dateFormatter stringFromDate:yesterday];
+    
+    NSString *formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    NSRange containsA = [formatStringForHours rangeOfString:@"a"];
+    BOOL hasAMPM = containsA.location != NSNotFound;
+    
+    
+    //相差的小时数
+    int hours = second / 3600;
+    
+    
+    if ([nowDayString isEqualToString:sourceDateofDayString]) {
+        
+        [dateFormatter setDateFormat:hasAMPM?@"a h:mm":@"HH:mm"];
+        ret = [dateFormatter stringFromDate:sourceDate];
+    }
+    else if( [yesterdayString isEqualToString:sourceDateofDayString]){
+        
+        [dateFormatter setDateFormat:hasAMPM?@"a h:mm":@"HH:mm"];
+        ret = [NSString stringWithFormat:@"昨天 %@",[dateFormatter stringFromDate:sourceDate]];
+        
+    }
+   
+    else  if(hours <= 24 * 7) {
+        
+        [dateFormatter setDateFormat:hasAMPM?@"a h:mm":@"HH:mm"];
+        NSString *time = [dateFormatter stringFromDate:sourceDate];
+        
+        if (messageWeek == 1) { //周日
+            
+            ret = [NSString stringWithFormat:@" 周日 %@",time];
+        }
+        
+        if (nowWeek > messageWeek) {
+            
+            ret = [NSString stringWithFormat:@" %@ %@",[self getWeekString:messageWeek],time];
+        }
+        else {
+        
+            ret = [NSString stringWithFormat:@" %@ %@",[self getWeekString:messageWeek],time];
+        }
+        
+    }
+    
+    else {
+        
+        [dateFormatter setDateFormat:hasAMPM?@"yyyy年M月d日 a h:mm":@"yyyy年M月d日 HH:mm"];
+        ret = [dateFormatter stringFromDate:sourceDate];
+        
+    }
+    
+    return ret;
+}
+
+
++ (NSString*)getWeekString:(int)weekIndex
+{
+    
+    NSString *ret = @"";
+    
+    switch (weekIndex) {
+        case 1:
+            ret = @"周日";
+            break;
+        case 2:
+            ret = @"周一";
+            break;
+        case 3:
+            ret = @"周二";
+            break;
+        case 4:
+            ret = @"周三";
+            break;
+        case 5:
+            ret = @"周四";
+            break;
+        case 6:
+            ret = @"周五";
+            break;
+        case 7:
+            ret = @"周六";
+            break;
+        default:
+            break;
+    }
+    return ret;
 }
 
 @end
