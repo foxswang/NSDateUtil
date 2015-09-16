@@ -106,12 +106,36 @@
     
     NSDate *yestodayDate  = [NSDate dateByAddingDay:-1 toDate:[NSDate date]];
     
+    NSDate *date1 = [NSDate date];
+    
+   
+    
+    
+    NSLog(@"%@",date1);
+    
+    NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
+    NSDate *dateInLocalTimezone = [date1 dateByAddingTimeInterval:timeZoneSeconds];
+    
+     NSLog(@"%@",dateInLocalTimezone);
+    
+     NSDate *date2  = [NSDate dateByAddingDay:0 toDate:[NSDate date]];
+     NSLog(@"%@",date2);
+
     
     NSLog(@"是否是明天%@,%d",tomorrowDate,[tomorrowDate isTomorrow]);
     NSLog(@"是否是昨天%@,%d",yestodayDate,[yestodayDate isYesterday]);
     NSLog(@"是否是今天%@,%d",[NSDate date],[[NSDate date] isToday]);
     
-    NSLog(@"------------ %ld",[[NSDate date] weekNumber]);
+    //微信时间测试
+    for (int i = 0; i < 10; i++)
+    {
+        NSDate *date  = [NSDate dateByAddingDay:-1*i toDate:[NSDate date]];
+        
+
+        NSLog(@"--- %@",[NSDate getWeChatFormatDateStringBySourceDate:date]);
+    }
+    
+    
 }
 
 @end

@@ -125,5 +125,12 @@ yyyy-MM-dd HH:mm:ss     2015-09-12 19:36:24
 #pragma mark - 微信日期显示格式
 
 + (NSString*)getWeChatFormatDateStringBySourceDate:(NSDate*)sourceDate;
-- (NSString*)getWeek:(int)weekIndex;
+//获取星期的现实日期
+//返回周一，周二等
++ (NSString*)getWeekDisplayString:(int)weekIndex;
+
+//转换成本地时间
+-(NSDate *)toLocalTime;
+//转换成全球时间
+-(NSDate *) toGlobalTime;
 @end

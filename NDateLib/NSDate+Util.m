@@ -32,6 +32,9 @@ static NSDateFormatter *_displayFormatter = nil;
         @autoreleasepool {
             if (_calendar == nil) {
 #if __has_feature(objc_arc)
+//                NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//                
+//                NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
                _calendar = [NSCalendar currentCalendar];
 #else
                 _calendar = [[NSCalendar currentCalendar] retain];
@@ -39,6 +42,8 @@ static NSDateFormatter *_displayFormatter = nil;
             }
             if (_displayFormatter == nil) {
                 _displayFormatter = [[NSDateFormatter alloc] init];
+                [_displayFormatter setTimeZone:[NSTimeZone localTimeZone]];
+                
             }
         }
     });
@@ -272,16 +277,23 @@ static NSDateFormatter *_displayFormatter = nil;
 //返回正数，fromDate 在toDate之后
 + (NSInteger)distanceDay:(NSDate *)fromDate withDate:(NSDate *)toDate
 {
+    
     NSCalendar *calendar = [[self class] sharedCalendar];
     
     NSDateFormatter *mdf = [[self class] sharedDateFormatter];
     [mdf setDateFormat:@"yyyy-MM-dd"];
     NSDate *midnightFrom = [mdf dateFromString:[mdf stringFromDate:fromDate]];
     NSDate *midnightTo = [mdf dateFromString:[mdf stringFromDate:toDate]];
-    
     NSDateComponents *components = [calendar components:(NSDayCalendarUnit)
-                                               fromDate:midnightFrom
-                                                 toDate:midnightTo                                                options:0];
+     fromDate:midnightFrom
+     toDate:midnightTo                                                options:0];
+    
+    /*
+    NSCalendar *calendar = [[self class] sharedCalendar];
+    NSDateComponents *components = [calendar components:(NSDayCalendarUnit)
+                                               fromDate:fromDate
+                                                 toDate:toDate                                                options:0];
+   */
     return [components day]*-1;
 }
 
@@ -514,6 +526,7 @@ static NSDateFormatter *_displayFormatter = nil;
 + (NSString *)getWeChatFormatDateStringBySourceDate:(NSDate *)sourceDate
 {
 
+    NSDate *localDate = [sourceDate toLocalTime];
     
     NSString *ret = @"";
     
@@ -522,88 +535,39 @@ static NSDateFormatter *_displayFormatter = nil;
         return ret;
     }
     
-    
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    unsigned int unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit |NSWeekdayCalendarUnit;
-    
-    NSDateComponents *sourceDateComponents = [cal components:unitFlags fromDate:sourceDate];
-    
-    int messageWeek = [sourceDateComponents weekday];
-    
-    
-    
-    NSDateComponents *nowDateComponents = [cal components:unitFlags fromDate:[NSDate date]];
-    
-    int nowWeek = [nowDateComponents weekday];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSTimeInterval second = [[NSDate date] timeIntervalSinceDate:sourceDate];
-    
-    
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    
-    NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-86400];
-    
-    NSString * nowDayString = [dateFormatter stringFromDate:[NSDate date]];
-    
-    NSString * sourceDateofDayString = [dateFormatter stringFromDate:sourceDate];
-    
-    NSString * yesterdayString = [dateFormatter stringFromDate:yesterday];
     
     NSString *formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
     NSRange containsA = [formatStringForHours rangeOfString:@"a"];
     BOOL hasAMPM = containsA.location != NSNotFound;
     
-    
     //相差的小时数
     int hours = second / 3600;
     
     
-    if ([nowDayString isEqualToString:sourceDateofDayString]) {
-        
-        [dateFormatter setDateFormat:hasAMPM?@"a h:mm":@"HH:mm"];
-        ret = [dateFormatter stringFromDate:sourceDate];
+    if ([sourceDate isToday]) {
+        ret = [NSDate stringFromDate:sourceDate withFormat:hasAMPM?@"a h:mm":@"HH:mm"];
     }
-    else if( [yesterdayString isEqualToString:sourceDateofDayString]){
-        
-        [dateFormatter setDateFormat:hasAMPM?@"a h:mm":@"HH:mm"];
-        ret = [NSString stringWithFormat:@"昨天 %@",[dateFormatter stringFromDate:sourceDate]];
+    else if([sourceDate isYesterday]){
+
+        ret = [NSString stringWithFormat:@"昨天 %@",[sourceDate stringWithFormat:hasAMPM?@"a h:mm":@"HH:mm"]];
         
     }
    
     else  if(hours <= 24 * 7) {
-        
-        [dateFormatter setDateFormat:hasAMPM?@"a h:mm":@"HH:mm"];
-        NSString *time = [dateFormatter stringFromDate:sourceDate];
-        
-        if (messageWeek == 1) { //周日
-            
-            ret = [NSString stringWithFormat:@" 周日 %@",time];
-        }
-        
-        if (nowWeek > messageWeek) {
-            
-            ret = [NSString stringWithFormat:@" %@ %@",[self getWeekString:messageWeek],time];
-        }
-        else {
-        
-            ret = [NSString stringWithFormat:@" %@ %@",[self getWeekString:messageWeek],time];
-        }
+        NSString *time = [sourceDate stringWithFormat:hasAMPM?@"a h:mm":@"HH:mm"];
+        ret = [NSString stringWithFormat:@" %@ %@",[self getWeekDisplayString:[sourceDate weekday]],time];
         
     }
-    
     else {
-        
-        [dateFormatter setDateFormat:hasAMPM?@"yyyy年M月d日 a h:mm":@"yyyy年M月d日 HH:mm"];
-        ret = [dateFormatter stringFromDate:sourceDate];
-        
+        ret = [sourceDate stringWithFormat:hasAMPM?@"yyyy年M月d日 a h:mm":@"yyyy年M月d日 HH:mm"];
     }
     
     return ret;
 }
 
 
-+ (NSString*)getWeekString:(int)weekIndex
++ (NSString*)getWeekDisplayString:(int)weekIndex
 {
     
     NSString *ret = @"";
@@ -634,6 +598,20 @@ static NSDateFormatter *_displayFormatter = nil;
             break;
     }
     return ret;
+}
+
+-(NSDate *)toLocalTime
+{
+    NSTimeZone *tz = [NSTimeZone defaultTimeZone];
+    NSInteger seconds = [tz secondsFromGMTForDate: self];
+    return [NSDate dateWithTimeInterval: seconds sinceDate: self];
+}
+
+-(NSDate *) toGlobalTime
+{
+    NSTimeZone *tz = [NSTimeZone defaultTimeZone];
+    NSInteger seconds = -[tz secondsFromGMTForDate: self];
+    return [NSDate dateWithTimeInterval: seconds sinceDate: self];
 }
 
 @end
